@@ -66,13 +66,33 @@ npm start
 
 ## API Endpoints
 
-- `POST /api/auth/register` — Register a new user
-- `POST /api/auth/login` — Login and receive a JWT token
-- `GET /api/books` — List all books
-- `POST /api/books` — Add a new book (admin only)
-- `GET /api/authors` — List all authors
-- `POST /api/authors` — Add a new author (admin only)
-- `GET /api/users` — List all users (admin only)
+### Auth
+
+- `POST /api/auth/register` — Register a new user (public)
+- `POST /api/auth/login` — Login and receive a JWT token (public)
+
+### Books
+
+- `GET /api/books` — Get all books (public)
+- `GET /api/books/:id` — Get book by ID (public)
+- `POST /api/books` — Add new book (admin only)
+- `PUT /api/books/:id` — Update book by ID (admin only)
+- `DELETE /api/books/:id` — Delete book by ID (admin only)
+
+### Authors
+
+- `GET /api/authors` — Get all authors (public)
+- `GET /api/authors/:id` — Get author by ID (public)
+- `POST /api/authors` — Add new author (admin only)
+- `PUT /api/authors/:id` — Update author by ID (admin only)
+- `DELETE /api/authors/:id` — Delete author by ID (admin only)
+
+### Users
+
+- `GET /api/users` — Get all users (admin only)
+- `GET /api/users/:id` — Get user by ID (admin or user himself)
+- `PUT /api/users/:id` — Update user by ID (admin or user himself)
+- `DELETE /api/users/:id` — Delete user by ID (admin or user himself)
 
 ## Contributing
 
