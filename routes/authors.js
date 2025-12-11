@@ -20,7 +20,15 @@ const {
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const authors = await Author.find();
+    // need for
+    //  1. number per page => const always 10 per page
+    //  2. number of page => needed from front
+    const normalQuery = { ...req.query };
+    const authorsPerPage = 2;
+    const { pageNumber } = normalQuery;
+    const authors = await Author.find()
+      .skip((pageNumber - 1) * 2)
+      .limit(authorsPerPage);
     // const authors = await Author.find()
     //   .sort({ firstName: 1 })
     //   .select("firstName lastName -_id");

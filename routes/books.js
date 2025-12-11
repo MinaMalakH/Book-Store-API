@@ -48,14 +48,24 @@ const asyncHandler = require("express-async-handler");
  * @method   GET
  * @access   public
  */
+
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const books = await Book.find().populate("author", [
-      "_id",
-      "firstName",
-      "lastName",
-    ]);
+    const normalQuery = { ...req.query };
+    const { minPrice, maxPrice } = normalQuery;
+    let books;
+    if (minPrice & maxPrice) {
+      books = await Book.find({
+        price: { $gte: minPrice, $lte: maxPrice },
+      }).populate("author", ["_id", "firstName", "lastName"]);
+    } else {
+      books = await Book.find().populate("author", [
+        "_id",
+        "firstName",
+        "lastName",
+      ]);
+    }
     res.status(200).json(books);
   })
 );
